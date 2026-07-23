@@ -4,7 +4,7 @@ import type {Movie} from '@/types/pelicula'
 import {peliculas} from '@/data/data.js'; 
 
 export const movieSlice = createSlice({
-    initialState: Movie[...peliculas], 
+    initialState: peliculas, 
     reducers: {}
 }); 
 
