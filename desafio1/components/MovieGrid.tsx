@@ -4,8 +4,8 @@ import MovieCard from './PeliculaCard';
 import { useState } from 'react';
 import { Movie } from '@/types/pelicula';
 import ModalPelicula from './ModalPelicula';
-import {useSelector} from 'react-redux'; 
-
+//import {useSelector} from 'react-redux'; 
+import { useAppSelector, useAppDispatch } from '@/redux/hooks'
 
 
 const showDetailsMovie = ()=> { 
@@ -14,7 +14,7 @@ const showDetailsMovie = ()=> {
 
 export default function MovieGrid(){
 
-    const peliculas = useSelector(state => state.movie); 
+    const peliculas =  useAppSelector((state) => state.movie); 
   
     const [peliculaSeleccionada, setPeliculaSeleccionada] = useState<Movie | undefined >(undefined);
 
