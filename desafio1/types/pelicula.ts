@@ -6,5 +6,5 @@ export interface Movie{
     status: string; 
     description: string; 
     author: string;
-    image: String;
+    image: string;
 }
