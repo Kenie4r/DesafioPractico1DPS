@@ -16,7 +16,7 @@ const colorAsiento: Record<string, string> = {
 export default function SeatBase({asiento, seleccionarAsiento} : SeatProps){ 
     if (asiento?.preferential){
         return (
-        <div className={`${colorAsiento[(asiento === undefinded)?'activo': asiento?.status]} text-white  p-2 rounded-2xl text-center `} style={{width: '45px'}}
+        <div className={`${colorAsiento[(asiento === undefined)?'activo': asiento?.status]} text-white  p-2 rounded-2xl text-center `} style={{width: '45px'}}
             onClick={()=>{seleccionarAsiento()}}>
             {asiento?.name}
         </div>
