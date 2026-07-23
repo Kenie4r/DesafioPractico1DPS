@@ -2,7 +2,7 @@ import { Seat } from "@/types/asiento";
 
 interface SeatProps{ 
     asiento?: Seat; 
-    seleccionarAsiento:()=>{}
+    seleccionarAsiento:()=>void
 }
 
 const colorAsiento: Record<string, string> = {

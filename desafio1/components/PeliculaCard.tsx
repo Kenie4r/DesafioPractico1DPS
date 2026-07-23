@@ -3,7 +3,7 @@ import { url } from "inspector";
 
 interface MovieProps{ 
     pelicula: Movie; 
-    showDetails: ()=>{};
+    showDetails: ()=>void;
 }
 
 
