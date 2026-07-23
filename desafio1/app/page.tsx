@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Seat } from "@/types/asiento";
 import MovieTheaterGrid from "@/components/SalaGrid";
 import {Provider} from 'react-redux'; 
-import store from '@/redux/store.ts'
+import store from '@/redux/store'
 import {useSelector} from 'react-redux'; 
 
 

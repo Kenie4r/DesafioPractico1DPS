@@ -4,6 +4,7 @@ import MovieCard from './PeliculaCard';
 import { useState } from 'react';
 import { Movie } from '@/types/pelicula';
 import ModalPelicula from './ModalPelicula';
+import {useSelector} from 'react-redux'; 
 
 
 
