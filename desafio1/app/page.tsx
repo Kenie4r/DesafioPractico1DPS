@@ -4,15 +4,25 @@ import MovieGrid from "@/components/MovieGrid";
 import Image from "next/image";
 import { Seat } from "@/types/asiento";
 import MovieTheaterGrid from "@/components/SalaGrid";
+import {Provider} from 'react-redux'; 
+
+import {useSelector} from 'react-redux'; 
+
+
 
 
 
 export default function Home() {
+
+  //const movies = useSelector(state => state.movie); 
+  
   return (
+    <Provider store={store}> 
     <div >
       <main className="w-full ">
-          <MovieTheaterGrid/>
+          <MovieGrid/>
       </main>
     </div>
+    </Provider>
   );
 }
