@@ -20,7 +20,7 @@ export default function MovieGrid(){
 
     return (
         <div className='grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-8'> 
-            {peliculas.map((e)=> {
+            {peliculas.map((e : Movie)=> {
                 return(<MovieCard key={e.id}  pelicula={e} showDetails={()=> {setPeliculaSeleccionada(e)}}/>)
             })}
 
