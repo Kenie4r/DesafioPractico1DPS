@@ -1,3 +1,4 @@
+'use client';
 import { Seat } from "@/types/asiento";
 import { Line } from "@/types/fila";
 import SeatBase from "./AsientosBase";
