@@ -1,7 +1,7 @@
 import { Seat } from "@/types/asiento";
 
 interface SeatProps{ 
-    asiento?: Seat; 
+    asiento?: Seat ; 
     seleccionarAsiento:()=>void
 }
 

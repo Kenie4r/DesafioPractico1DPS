@@ -1,7 +1,7 @@
 import { Movie } from "@/types/pelicula";
 
 interface ModalPelicualProps{
-    pelicula : Movie; 
+    pelicula ?: Movie; 
     closeDetails :  () =>void; 
 }
 
