@@ -16,16 +16,20 @@ export default function  ModalPelicula({pelicula, closeDetails} : ModalPelicualP
         return null; 
 
     const seleccionarSala = (sala: MovieTheather)=>{
+        console.log(sala)
         dispatch(seleccionar(sala));
     }
 
     //setSalaSeleccionada(movieTheathers[0]);
     return (
         <div className="fixed bg-gray-800/50 w-full h-full top-0 rigth-0
-            flex flex-1 justify-center items-center"> 
+            flex flex-1 justify-center items-center" style={{zIndex: '1000000'}}> 
 
             <div className=" relative w-3xl  gap-4 bg-white h-2xl rounded-lg shadow-xl m-4"> 
-                <div className="absolute top-0 right-0 p-2 hover:cursor-pointer" onClick={closeDetails}>❌</div>
+                <div className="absolute top-0 right-0 p-2 hover:cursor-pointer" onClick={closeDetails}>
+                    <svg className="w-6 h-6 mb-2 mx-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14.5 9.50002L9.5 14.5M9.49998 9.5L14.5 14.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path d="M22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C21.5093 4.43821 21.8356 5.80655 21.9449 8" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+
+                </div>
                 <div className="flex p-8 gap-8">
                     <img src={pelicula.image} alt={pelicula.title}
                     className="fle-none w-62"/>

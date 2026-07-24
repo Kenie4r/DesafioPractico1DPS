@@ -12,6 +12,7 @@ import ModalAsientos from '@/components/modalAsientos'
 import ComprasTable from "@/components/comprasTable";
 import NavigationBarSS from "@/components/BarraNavegacion";
 
+
 export default function Home() {
 
   //const movies = useSelector(state => state.movie); 
@@ -20,12 +21,9 @@ export default function Home() {
     <Provider store={store}> 
     <div >
       <main className="w-full ">
-        <div className="w-full flex justify-center items-center">
-          <MovieGrid/>        
-          <ModalAsientos/>
-                    
-        </div>
-        <NavigationBarSS/>
+          <ComprasTable/>
+            
+          <NavigationBarSS/>
       </main>
     </div>
     </Provider>

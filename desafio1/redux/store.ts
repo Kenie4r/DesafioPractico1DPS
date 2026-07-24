@@ -3,6 +3,7 @@ import movieReducer from './slices/peliculasSlices'
 import movieTheatherReducer from './slices/salasSlice'
 import selectmovieTheatherReducer from './slices/selectSalaSlice';
 import  reservationReducer  from './slices/reservaSlice';
+import  comprasReducer  from './slices/comprassSlice';
 
 const store = configureStore({
     reducer : { 
@@ -11,7 +12,8 @@ const store = configureStore({
         //line : lineReducer, 
        movieTheather: movieTheatherReducer,
        selectmovieTheather: selectmovieTheatherReducer, 
-       reservation : reservationReducer
+       reservation : reservationReducer, 
+       compras: comprasReducer
     }
 }); 
 

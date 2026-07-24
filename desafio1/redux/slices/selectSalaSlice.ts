@@ -34,9 +34,40 @@ export const selectmovieTheatherSlice = createSlice({
             }
             //return action.payload;
 
+        },
+        limpiarAsientos: (state, action)=>{ 
+            const asientoSeleccionado: Seat = action.payload;
+
+            console.log(asientoSeleccionado)
+
+            const linea = state.lines.find(l => l.lineNumber === asientoSeleccionado.name[0]);
+
+            if (!linea) return;
+
+            const asiento = linea.seats.find(s => s.name === asientoSeleccionado.name);
+
+            if (!asiento) return;
+
+            asiento.status = "activo";
+            
+        }, 
+        cerrarAsiento: (state, action) => { 
+            const asientoSeleccionado: Seat = action.payload;
+
+            console.log(asientoSeleccionado)
+
+            const linea = state.lines.find(l => l.lineNumber === asientoSeleccionado.name[0]);
+
+            if (!linea) return;
+
+            const asiento = linea.seats.find(s => s.name === asientoSeleccionado.name);
+
+            if (!asiento) return;
+
+            asiento.status = "inactivo";
         }
-    },
+    }
 });
 
-export const { seleccionar,usarAsiento } = selectmovieTheatherSlice.actions;
+export const { seleccionar,usarAsiento, limpiarAsientos, cerrarAsiento } = selectmovieTheatherSlice.actions;
 export default selectmovieTheatherSlice.reducer;

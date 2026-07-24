@@ -9,7 +9,12 @@ import { defaultSerializeQueryArgs } from "@reduxjs/toolkit/query";
 export const movieTheatherSlice = createSlice({
     name: 'movieTheater', 
     initialState: salasData,
-    reducers: {}
+    reducers: {
+        cambioSala : (state, action)=>{ 
+            return action.payload
+        }
+
+    }
 })
 
 export default movieTheatherSlice.reducer;

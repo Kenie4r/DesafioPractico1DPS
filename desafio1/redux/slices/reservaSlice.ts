@@ -12,7 +12,7 @@ const initState : ticketsBuy  = {
 };
 
 export const reservationSlice = createSlice({
-    name: 'reservationSlice', 
+    name: 'reservation', 
     initialState: initState,
     reducers: {
         iniciarReserva : (state, action)=> 
@@ -32,10 +32,13 @@ export const reservationSlice = createSlice({
             }
 
             console.log(state.seats.length);
+        }, 
+        limpiarSeleccion: (state, action)=> {
+            state.seats = []; 
         }
     }
 })
 
 
-export const {iniciarReserva,seleccionAsiento} = reservationSlice.actions;
+export const {iniciarReserva,seleccionAsiento, limpiarSeleccion} = reservationSlice.actions;
 export default reservationSlice.reducer;

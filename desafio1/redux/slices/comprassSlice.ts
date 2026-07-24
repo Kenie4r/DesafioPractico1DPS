@@ -1,15 +1,42 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type {MovieTheather} from '@/types/Sala'; 
-//import {salasData} from '@/data/salasData'; 
-import { defaultSerializeQueryArgs } from "@reduxjs/toolkit/query";
-import { ticketsBuy } from "@/types/reserva";
+import type { ticketsBuy } from "@/types/reserva";
 
-const initState : ticketsBuy [] = [];
+const STORAGE_KEY = "comprasDPS";
 
-export const reservationSlice = createSlice({
-    name: 'comprasSlice', 
-    initialState: initState,
-    reducers: {}
-})
+const loadComprasFromStorage = (): ticketsBuy[] => {
+    if (typeof window === "undefined") {
+        return [];
+    }
 
-export default reservationSlice.reducer;
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    if (!stored) {
+        return [];
+    }
+
+    try {
+        const parsed = JSON.parse(stored);
+        return Array.isArray(parsed) ? parsed : [];
+    } catch {
+        return [];
+    }
+};
+
+const initialState: ticketsBuy[] = loadComprasFromStorage();
+
+export const comprasSlice = createSlice({
+    name: "compras",
+    initialState,
+    reducers: {
+        agregarCompra: (state, action: { payload: ticketsBuy }) => {
+            state.push(action.payload);
+        },
+        guardarCompra: (state) => {
+            if (typeof window !== "undefined") {
+                window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            }
+        }
+    }
+});
+
+export const { agregarCompra, guardarCompra } = comprasSlice.actions;
+export default comprasSlice.reducer;

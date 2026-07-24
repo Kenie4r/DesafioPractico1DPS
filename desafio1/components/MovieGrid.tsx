@@ -20,7 +20,7 @@ export default function MovieGrid(){
     const [peliculaSeleccionada, setPeliculaSeleccionada] = useState<Movie | undefined >(undefined);
 
     return (
-        <div className='grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-8'> 
+        <div className='p-8 grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-4 w-full'> 
             {peliculas.map((e : Movie)=> {
                 return(<MovieCard key={e.id}  pelicula={e} showDetails={()=> {setPeliculaSeleccionada(e)}}/>)
             })}
