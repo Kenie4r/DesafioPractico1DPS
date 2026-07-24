@@ -1,12 +1,17 @@
 import {configureStore} from '@reduxjs/toolkit'; 
 import movieReducer from './slices/peliculasSlices'
+import movieTheatherReducer from './slices/salasSlice'
+import selectmovieTheatherReducer from './slices/selectSalaSlice';
+import  reservationReducer  from './slices/reservaSlice';
 
 const store = configureStore({
     reducer : { 
         //seat : seatsReducer, 
         movie : movieReducer,
         //line : lineReducer, 
-       // movieTheather: movieTheatherReducer,
+       movieTheather: movieTheatherReducer,
+       selectmovieTheather: selectmovieTheatherReducer, 
+       reservation : reservationReducer
     }
 }); 
 

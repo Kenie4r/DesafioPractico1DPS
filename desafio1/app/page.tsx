@@ -7,8 +7,8 @@ import MovieTheaterGrid from "@/components/SalaGrid";
 import {Provider} from 'react-redux'; 
 import store from '@/redux/store'
 import { useAppSelector, useAppDispatch } from '@/redux/hooks'
-
-
+import BuyingSeats from "@/components/compraBarra";
+import ModalAsientos from '@/components/modalAsientos'
 
 
 export default function Home() {
@@ -20,6 +20,7 @@ export default function Home() {
     <div >
       <main className="w-full ">
           <MovieGrid/>
+          <ModalAsientos/>
       </main>
     </div>
     </Provider>

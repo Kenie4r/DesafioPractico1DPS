@@ -8,6 +8,7 @@ import ModalPelicula from './ModalPelicula';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks'
 
 
+
 const showDetailsMovie = ()=> { 
     return null;
 }
