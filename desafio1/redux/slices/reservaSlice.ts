@@ -4,11 +4,14 @@ import type {MovieTheather} from '@/types/Sala';
 import { defaultSerializeQueryArgs } from "@reduxjs/toolkit/query";
 import { ticketsBuy } from "@/types/reserva";
 
+const TICKET_PRICE = 3.5;
+
 const initState : ticketsBuy  = {
     movieId: 0 , 
     price: 0 , 
     seats: [], 
-    theatherId: 0
+    theatherId: 0,
+    hour: ''
 };
 
 export const reservationSlice = createSlice({
@@ -22,19 +25,22 @@ export const reservationSlice = createSlice({
         seleccionAsiento : (state, action)=>{
          const asientoSeleccionado = action.payload;
 
+            if (asientoSeleccionado.status !== 'activo' && asientoSeleccionado.status !== 'seleccionado') {
+                return;
+            }
+
             const index = state.seats.findIndex(            s => s.name === asientoSeleccionado.name);
-             console.log('prueba : ' + index)
             if (index === -1) {
-                    console.log('prueba : ' + asientoSeleccionado)
                 state.seats.push(asientoSeleccionado);
             } else {
                 state.seats.splice(index, 1);
             }
 
-            console.log(state.seats.length);
+            state.price = state.seats.length * TICKET_PRICE;
         }, 
         limpiarSeleccion: (state, action)=> {
             state.seats = []; 
+            state.price = 0;
         }
     }
 })

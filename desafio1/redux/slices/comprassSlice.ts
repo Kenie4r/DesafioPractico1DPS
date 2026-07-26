@@ -4,11 +4,8 @@ import type { ticketsBuy } from "@/types/reserva";
 const STORAGE_KEY = "comprasDPS";
 
 const loadComprasFromStorage = (): ticketsBuy[] => {
-    if (typeof window === "undefined") {
-        return [];
-    }
 
-    const stored = window.localStorage.getItem(STORAGE_KEY);
+    const stored = localStorage.getItem(STORAGE_KEY);
     if (!stored) {
         return [];
     }

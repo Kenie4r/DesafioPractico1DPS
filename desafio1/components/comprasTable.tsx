@@ -1,69 +1,73 @@
-import { useAppSelector, useAppDispatch } from '@/redux/hooks'
+import { useAppSelector } from '@/redux/hooks';
 
+interface ComprasTableProps {
+  onSelectCompra: (compra: any) => void;
+}
 
-export default function ComprasTable(){ 
-    const ventas = useAppSelector((state)=> state.compras)
-    return (
-        <div className="bg-white flex flex-col p-8 gap-4">
-            <div className="text-lg text-bold">
-                <h2>Listado de compras realizadas</h2>
-            </div>
-            <div  className="p-2 shadow-lg rounded-lg h-2xl">
-                <table className="table table-auto min-w-full leading-normal">
-                    <thead className="bg-gray-400 text-white 2-full " >
-                        <tr className=""> 
-                            <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">#Orden</th>
-                            <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Pelicula</th>
-                            <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"># asientos</th>
-                            <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Sala</th>
-                            <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Detalle</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {ventas.map((e)=> {
-                            return (<tr className="hover:bg-gray-200">
-                             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                                 <p className="text-gray-900 whitespace-no-wrap">
-                                    Orden #
-                                </p >
-                                <p className="text-gray-600 whitespace-no-wrap">00000</p>
-                             </td>
-                            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                                  <p className="text-gray-900 whitespace-no-wrap">
-                                    {e.movieId}
-                                </p >
-                             </td>
-                             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                                  <p className="text-gray-900 whitespace-no-wrap">
-                                    Cantidad de asientos: 
-                                </p >
-                                <p className="text-gray-600 whitespace-no-wrap">{e.seats.length} asientos</p>
-                             </td>
+export default function ComprasTable({ onSelectCompra }: ComprasTableProps) {
+  const peliculas = useAppSelector((state) => state.movie);
+  const ventas = useAppSelector((state) => state.compras);
 
-                             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                                  <p className="text-gray-900 whitespace-no-wrap">
-                                    Sala
-                                </p >
-                                <p className="text-gray-600 whitespace-no-wrap">{e.theatherId}</p>
-                             </td>
-
-
-                              <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <span
-                                className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
-                                >
-                                <span
-                                    aria-hidden
-                                    className="absolute inset-0 bg-green-200 opacity-50 rounded-full hover:cursor-pointer"
-                                ></span>
-                                <span className="relative hover:cursor-pointer">Detalle de asientos</span>
-                                </span>
-                            </td>
-                        </tr>)
-                        })}                        
-                    </tbody>
-                </table>
-            </div>
-       </div>
-    ); 
+  return (
+    <div className="flex flex-col gap-4 bg-white p-8">
+      <div className="text-lg font-bold">
+        <h2>Listado de compras realizadas</h2>
+      </div>
+      <div className="h-2xl rounded-lg p-2 shadow-lg">
+        <table className="table table-auto min-w-full leading-normal">
+          <thead className="bg-gray-400 text-white">
+            <tr>
+              <th className="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">#Orden</th>
+              <th className="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">Pelicula</th>
+              <th className="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700"># asientos</th>
+              <th className="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">Sala</th>
+              <th className="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">Hora</th>
+              <th className="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700">Detalle</th>
+            </tr>
+          </thead>
+          <tbody>
+            {ventas.map((e, index) => {
+              const pelicula = peliculas.find((p) => p.id === e.movieId);
+              return (
+                <tr key={`${e.movieId}-${index}`} className="hover:bg-gray-200">
+                  <td className="border-b border-gray-200 bg-white px-5 py-5 text-center text-sm">
+                    <p className="whitespace-no-wrap text-gray-900">Orden #</p>
+                    <p className="whitespace-no-wrap text-gray-600">{index + 1}</p>
+                  
+                  </td>
+                  <td className="border-b border-gray-200 bg-white px-5 py-5 text-center text-sm">
+                    <p className="whitespace-no-wrap text-gray-900">{pelicula?.title ?? 'Película'}</p>
+                  </td>
+                  <td className="border-b border-gray-200 bg-white px-5 py-5 text-center text-sm">
+                    <p className="whitespace-no-wrap text-gray-900">Cantidad de asientos:</p>
+                    <p className="whitespace-no-wrap text-gray-600">{e.seats.length} asientos</p>
+                  </td>
+                  <td className="border-b border-gray-200 bg-white px-5 py-5 text-center text-sm">
+                    <p className="whitespace-no-wrap text-gray-900">Sala</p>
+                    <p className="whitespace-no-wrap text-gray-600">{e.theatherId}</p>
+                  </td>
+                  <td className="border-b border-gray-200 bg-white px-5 py-5 text-center text-sm">
+                    <p className="whitespace-no-wrap text-gray-900">Hora</p>
+                    <p className="whitespace-no-wrap text-gray-600">{e.hour ?? '--:--'}</p>
+                  </td>
+                  <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                    <div className="flex flex-wrap gap-2">
+                      
+                      <span className="rounded-full bg-slate-100 px-3 py-1 text-sm text-slate-500">Detalle Asientos</span>
+                        <button
+                          onClick={() => onSelectCompra(e)}
+                          className="mt-2 rounded bg-blue-500 px-3 py-1 text-sm text-white"
+                        >
+                          Ver Detalle
+                        </button>                     
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }

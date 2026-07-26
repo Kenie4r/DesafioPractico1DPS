@@ -1,32 +1,49 @@
 'use client';
 
 import MovieCard from './PeliculaCard';
-import { useState } from 'react';
-import { Movie } from '@/types/pelicula';
+import { useMemo, useState } from 'react';
+import type { Movie } from '@/types/pelicula';
 import ModalPelicula from './ModalPelicula';
-//import {useSelector} from 'react-redux'; 
-import { useAppSelector, useAppDispatch } from '@/redux/hooks'
+import { useAppSelector } from '@/redux/hooks';
 
+export default function MovieGrid() {
+  const peliculas = useAppSelector((state) => state.movie);
+  const [peliculaSeleccionada, setPeliculaSeleccionada] = useState<Movie | undefined>(undefined);
 
+  const peliculasHabilitadas = useMemo(
+    () => peliculas.filter((pelicula) => pelicula.status === 'En cartelera'),
+    [peliculas]
+  );
+  const proximosEstrenos = useMemo(
+    () => peliculas.filter((pelicula) => pelicula.status === 'Próximamente'),
+    [peliculas]
+  );
 
-const showDetailsMovie = ()=> { 
-    return null;
-}
+  const renderSection = (title: string, items: Movie[]) => (
+    <section className="w-full">
+      <div className="mb-4 flex items-center justify-between">
+        <h2 className="text-xl font-semibold text-slate-800">{title}</h2>
+        <span className="text-sm text-slate-500">{items.length} películas</span>
+      </div>
+      <div className="flex gap-4 overflow-x-auto pb-4">
+        {items.map((pelicula) => (
+          <div key={pelicula.id} className="min-w-[220px] max-w-[220px] flex-shrink-0">
+            <MovieCard pelicula={pelicula} showDetails={() => setPeliculaSeleccionada(title=='En cartelera'?pelicula:undefined)} />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 
-export default function MovieGrid(){
+  return (
+    <div className="w-full space-y-8 p-4 sm:p-8">
+      {renderSection('En cartelera', peliculasHabilitadas)}
+      {renderSection('Próximamente', proximosEstrenos)}
 
-    const peliculas =  useAppSelector((state) => state.movie); 
-  
-    const [peliculaSeleccionada, setPeliculaSeleccionada] = useState<Movie | undefined >(undefined);
-
-    return (
-        <div className='p-8 grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-4 w-full'> 
-            {peliculas.map((e : Movie)=> {
-                return(<MovieCard key={e.id}  pelicula={e} showDetails={()=> {setPeliculaSeleccionada(e)}}/>)
-            })}
-
-            <ModalPelicula closeDetails={()=>{setPeliculaSeleccionada(undefined)}} pelicula={peliculaSeleccionada}/>
-
-        </div>
-    ); 
+      <ModalPelicula
+        closeDetails={() => setPeliculaSeleccionada(undefined)}
+        pelicula={peliculaSeleccionada}
+      />
+    </div>
+  );
 }

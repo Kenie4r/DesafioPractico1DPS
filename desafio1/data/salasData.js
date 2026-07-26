@@ -1,10 +1,12 @@
 import { peliculas } from './data.js';
 
 const seatPatterns = [
-  ['n/a', 'activo', 'activo', 'activo', 'activo', 'inactivo', 'activo', 'preseleccionado', 'activo', 'activo', 'activo', 'activo', 'activo', 'n/a'],
+  ['n/a', 'activo', 'activo', 'activo', 'activo', 'inactivo', 'n/a', 'n/a', 'activo', 'activo', 'activo', 'activo', 'activo', 'n/a'],
   ['n/a', 'activo', 'inactivo', 'activo', 'preseleccionado', 'activo', 'activo', 'activo', 'activo', 'activo', 'activo', 'inactivo', 'activo', 'n/a'],
   ['n/a', 'activo', 'activo', 'inactivo', 'activo', 'activo', 'preseleccionado', 'activo', 'activo', 'activo', 'activo', 'activo', 'activo', 'n/a'],
 ];
+
+export const defaultHours = ['14:00', '16:30', '19:00', '21:30'];
 
 const buildLine = (lineNumber, pattern, variant) => ({
   lineNumber,
@@ -15,14 +17,18 @@ const buildLine = (lineNumber, pattern, variant) => ({
   })),
 });
 
-const buildSala = (movieId, theaterNumber, variant) => ({
+const buildSala = (movieId, theaterNumber, variant, hour) => ({
   movieId,
   MovieTheaterNumber: theaterNumber,
+  hour,
   lines: ['A', 'B', 'C', 'D', 'E'].map((lineNumber, index) =>
     buildLine(lineNumber, seatPatterns[(variant + index) % seatPatterns.length], variant + index)
   ),
 });
 
+export const buildSalasForMovie = (movieId, theaterNumberBase = 1, hours = defaultHours) =>
+  hours.map((hour, index) => buildSala(movieId, theaterNumberBase + index, index, hour));
+
 export const salasData = peliculas.flatMap((pelicula, movieIndex) =>
-  [1, 2, 3].map((theaterOffset, index) => buildSala(pelicula.id, movieIndex * 10 + theaterOffset, movieIndex + index))
+  buildSalasForMovie(pelicula.id, movieIndex * 10 + 1)
 );

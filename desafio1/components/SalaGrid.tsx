@@ -15,8 +15,8 @@ export default function MovieTheaterGrid ({movieTheather} : MovieTheatherProps){
         <div>
             <div className="p-8">
                 <div className="border-t-10 border-solid border-gray-700 text-center rounded-xl">
-                
                     <p className="font-bold text-lg"> Sala #{movieTheather?.MovieTheaterNumber}</p>
+                    <p className="text-sm text-slate-600">Hora: {movieTheather?.hour}</p>
                 </div>
             </div>
             <div>

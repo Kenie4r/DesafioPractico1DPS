@@ -19,7 +19,11 @@ export default function LineMovie({lineMovie} : LineProps){
     const dispatch = useAppDispatch();
     
     const seleccionarAsiento = (asiento: Seat)=> {
-          dispatch(usarAsiento(asiento));
+        if (asiento.status !== 'activo' && asiento.status !== 'seleccionado') {
+            return;
+        }
+
+        dispatch(usarAsiento(asiento));
         dispatch(seleccionAsiento(asiento));
     }
     return (
