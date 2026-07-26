@@ -67,7 +67,7 @@ export default function Dashboard() {
       </div>
 
       <div className="rounded-xl border border-slate-200 p-4">
-        <h3 className="mb-4 text-lg font-semibold text-slate-800">Ventas por pel\u00edcula</h3>
+        <h3 className="mb-4 text-lg font-semibold text-slate-800">Ventas por pelicula</h3>
         <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={ventasPorPelicula} margin={{ top: 8, right: 8, left: 0, bottom: 8 }}>

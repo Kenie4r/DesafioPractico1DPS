@@ -11,8 +11,25 @@ type FormularioPeliculaProps = {
   onCancel?: () => void;
 };
 
-type MovieForm = Omit<Movie, 'id'>;
-type FormErrors = Partial<Record<keyof MovieForm, string>>;
+type MovieForm = {
+  title: string;
+  genre: string;
+  duration: number;
+  status: string;
+  description: string;
+  author: string;
+  image: string;
+};
+
+type FormErrors = {
+  title?: string;
+  genre?: string;
+  duration?: string;
+  status?: string;
+  description?: string;
+  author?: string;
+  image?: string;
+};
 
 const initialForm: MovieForm = {
   title: '',

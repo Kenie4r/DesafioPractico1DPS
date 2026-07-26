@@ -6,7 +6,7 @@ import { peliculas } from '@/data/data.js';
 const getInitialMovies = (): Movie[] => {
 
 
-  const storedMovies = localStorage.getItem('moviesCrud');
+  const storedMovies = window.localStorage.getItem('moviesCrud');
   if (!storedMovies) {
     return peliculas.map((pelicula) => ({ ...pelicula }));
   }
